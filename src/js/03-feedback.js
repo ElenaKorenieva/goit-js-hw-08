@@ -26,7 +26,6 @@ function onLoadSite() {
   const localStorageData = JSON.parse(
     localStorage.getItem('feedback-form-state')
   );
-  console.log(localStorageData);
 
   if (
     Array.isArray(localStorageData) &&
