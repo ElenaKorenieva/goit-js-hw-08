@@ -26,14 +26,19 @@ function onLoadSite() {
   const localStorageData = JSON.parse(
     localStorage.getItem('feedback-form-state')
   );
+  formEl.removeAttribute('autocomplete');
+  formEl.setAttribute('autocomplete', 'on');
 
   if (
     Array.isArray(localStorageData) &&
     Object.keys(localStorageData).length !== 0
-  ) {
-    formData.email = emailEl.value || '';
-    formData.message = messageEl.value || '';
-  }
+  )
+    try {
+      formData.email = emailEl.value || '';
+      formData.message = messageEl.value || '';
+    } catch (error) {
+      console.error('Get state error: ', error.message);
+    }
 }
 
 onLoadSite();
