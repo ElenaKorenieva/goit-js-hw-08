@@ -31,8 +31,8 @@ function onLoadSite() {
     Array.isArray(localStorageData) &&
     Object.keys(localStorageData).length !== 0
   ) {
-    formData.email = emailEl.value;
-    formData.message = messageEl.value;
+    formData.email = emailEl.value || '';
+    formData.message = messageEl.value || '';
   }
 }
 
