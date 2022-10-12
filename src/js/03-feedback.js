@@ -1,13 +1,17 @@
 import throttle from 'lodash.throttle';
 
 const formEl = document.querySelector('.feedback-form');
-const emailEl = document.querySelector('.email');
-const messageEl = document.querySelector('.message');
+const emailEl = document.querySelector('[name="email"]');
+const messageEl = document.querySelector('[name="message"]');
+console.log(emailEl, messageEl);
 
 formEl.addEventListener('input', throttle(onInputChange, 500));
 formEl.addEventListener('submit', onSubmitChange);
 
-const formData = {};
+const formData = {
+  email: '',
+  message: '',
+};
 
 function onInputChange(event) {
   //   console.dir(event);
@@ -26,19 +30,14 @@ function onLoadSite() {
   const localStorageData = JSON.parse(
     localStorage.getItem('feedback-form-state')
   );
-  formEl.removeAttribute('autocomplete');
-  formEl.setAttribute('autocomplete', 'on');
 
-  if (
-    Array.isArray(localStorageData) &&
-    Object.keys(localStorageData).length !== 0
-  )
-    try {
-      formData.email = emailEl.value || '';
-      formData.message = messageEl.value || '';
-    } catch (error) {
-      console.error('Get state error: ', error.message);
-    }
+  if (localStorageData && Object.keys(localStorageData).length !== 0) {
+    console.log(2);
+    emailEl.value = localStorageData.email;
+    formData.email = localStorageData.email;
+    messageEl.value = localStorageData.message;
+    formData.message = localStorageData.message;
+  }
 }
 
 onLoadSite();
