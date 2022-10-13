@@ -30,7 +30,6 @@ function onLoadSite() {
   );
 
   if (localStorageData && Object.keys(localStorageData).length !== 0) {
-    console.log(2);
     emailEl.value = localStorageData.email;
     formData.email = localStorageData.email;
     messageEl.value = localStorageData.message;
